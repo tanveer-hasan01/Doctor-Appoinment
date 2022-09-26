@@ -39,7 +39,7 @@
             android:background="@drawable/img_2"
 
             android:ems="10"
-            android:hint="ex@gmail.com"
+            android:hint="doc@gmail.com"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"

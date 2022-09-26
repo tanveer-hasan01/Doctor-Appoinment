@@ -10,5 +10,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_login);
+        setTitle("Doctor Login");
     }
 }
