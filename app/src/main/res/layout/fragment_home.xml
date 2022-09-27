@@ -7,7 +7,8 @@
     android:background="#555FD2"
     tools:context=".fragment.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,6 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
@@ -41,8 +43,28 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_category" />
 
+        <TextView
+            android:layout_marginLeft="16sp"
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Doctors"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            tools:layout_editor_absoluteX="19dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+           tools:listitem="@layout/item_doctors"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView9"
