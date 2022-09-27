@@ -2,11 +2,12 @@ package com.example.dochere.model;
 
 public class ModelCategory {
 
-    int image, string category;
+    int image;
+    String category;
 
-    public ModelCategory(int image, int string) {
+    public ModelCategory(int image, String category) {
         this.image = image;
-        this.string = string;
+        this.category = category;
     }
 
     public int getImage() {
@@ -17,11 +18,11 @@ public class ModelCategory {
         this.image = image;
     }
 
-    public int getString() {
-        return string;
+    public String getCategory() {
+        return category;
     }
 
-    public void setString(int string) {
-        this.string = string;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
