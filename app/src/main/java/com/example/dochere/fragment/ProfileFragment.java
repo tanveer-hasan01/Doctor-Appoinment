@@ -1,5 +1,6 @@
 package com.example.dochere.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,9 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.dochere.AppMoodActivity;
+import com.example.dochere.MainActivity;
 import com.example.dochere.MysharedPreferance;
 import com.example.dochere.R;
+import com.example.dochere.SignUpActivity;
 import com.example.dochere.databinding.FragmentHomeBinding;
 import com.example.dochere.databinding.FragmentProfileBinding;
 
@@ -37,6 +42,19 @@ public class ProfileFragment extends Fragment {
         binding.phone.setText(mysharedPreferance.getPhone());
 
 
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Logging out", Toast.LENGTH_LONG).show();
+                mysharedPreferance.setSession("none");
+                mysharedPreferance.setName("none");
+                mysharedPreferance.setPhone("none");
+                mysharedPreferance.setEmail("none");
+                mysharedPreferance.setlogin_type("none");
+                startActivity(new Intent(getContext(), AppMoodActivity.class));
+
+            }
+        });
 
         return view;
     }

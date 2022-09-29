@@ -18,6 +18,7 @@ public class AppMoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAppMoodBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setTitle("App Mood");
         mysharedPreferance = MysharedPreferance.getPreferences(this);
 
         binding.patient.setOnClickListener(new View.OnClickListener() {

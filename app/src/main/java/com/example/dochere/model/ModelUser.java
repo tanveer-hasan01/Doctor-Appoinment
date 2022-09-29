@@ -8,6 +8,10 @@ public class ModelUser {
     @Expose
     private String id;
 
+    @SerializedName("response")
+    @Expose
+    private String response;
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -30,6 +34,14 @@ public class ModelUser {
 
     public String getId() {
         return id;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
     }
 
     public void setId(String id) {

@@ -10,4 +10,7 @@ public interface ApiInterface {
     @POST("createAccount.php")
     Call<ModelUser> createAccount(@Body ModelUser modelUser);
 
+    @POST("login.php")
+    Call<ModelUser> login(@Body ModelUser modelUser);
+
 }

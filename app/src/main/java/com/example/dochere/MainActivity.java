@@ -45,23 +45,29 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
+
                     case R.id.appoinment:
+                        setTitle("My appointment");
                         if (mysharedPreferance.getSession().equals("none")) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         } else {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, appointmentFragment).commit();
                         }
                         return true;
+
                     case R.id.search:
+                        setTitle("Search Doctor");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
                         return true;
-                        case R.id.profile:
+
+                    case R.id.profile:
+                        setTitle("Profile");
                         if (mysharedPreferance.getSession().equals("none")) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         } else {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
                         }
-                            return true;
+                        return true;
                 }
 
                 return false;
