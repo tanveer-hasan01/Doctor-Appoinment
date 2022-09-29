@@ -186,32 +186,9 @@
                     android:text="Female" />
             </RadioGroup>
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="Age"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-            <EditText
-                android:id="@+id/age"
-                android:layout_width="100dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/img_2"
-                android:ems="10"
-                android:hint="00"
-                android:inputType="number"
-                android:maxLength="2"
-                android:paddingLeft="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+
 
             <TextView
                 android:id="@+id/textView7"
@@ -230,14 +207,14 @@
                 android:layout_width="190dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/img_2"
                 android:ems="10"
                 android:hint="+8801"
                 android:inputType="number"
                 android:maxLength="11"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/age" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
