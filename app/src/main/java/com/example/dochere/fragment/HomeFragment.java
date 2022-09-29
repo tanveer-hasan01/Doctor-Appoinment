@@ -11,18 +11,31 @@ import android.view.ViewGroup;
 
 import com.example.dochere.R;
 import com.example.dochere.adapter.AdapterCategory;
+import com.example.dochere.adapter.AdapterDoc;
 import com.example.dochere.databinding.FragmentHomeBinding;
 import com.example.dochere.model.ModelCategory;
+import com.example.dochere.model.ModelDoc;
+import com.example.dochere.network.ApiClient;
+import com.example.dochere.network.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class HomeFragment extends Fragment {
 
     ArrayList<ModelCategory> categories=new ArrayList<>();
+    ArrayList<ModelDoc> docs=new ArrayList<>();
     FragmentHomeBinding binding;
 
+    ApiInterface apiInterface;
     AdapterCategory adapter;
+    AdapterDoc adapterDoc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +48,8 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-
+        Retrofit instance = ApiClient.instance();
+        apiInterface = instance.create(ApiInterface.class);
 
         categories.add(new ModelCategory(R.drawable.img6,"Cardiologist"));
         categories.add(new ModelCategory(R.drawable.image7,"Orthopaedic"));
@@ -44,8 +58,26 @@ public class HomeFragment extends Fragment {
         adapter = new AdapterCategory(categories, getContext());
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerView.setLayoutManager(horizontalLayoutManagaer);
-
         binding.recyclerView.setAdapter(adapter);
+
+
+
+        binding.docRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        adapterDoc = new AdapterDoc(docs,getContext());
+        apiInterface.getDoctors().enqueue(new Callback<List<ModelDoc>>() {
+            @Override
+            public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+                docs.addAll(response.body());
+                binding.docRecycler.setAdapter(adapterDoc);
+                adapterDoc.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelDoc>> call, Throwable t) {
+
+            }
+        });
+
 
 
         return view;

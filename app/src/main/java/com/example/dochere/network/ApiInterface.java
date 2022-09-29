@@ -1,9 +1,13 @@
 package com.example.dochere.network;
 
+import com.example.dochere.model.ModelDoc;
 import com.example.dochere.model.ModelUser;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -12,5 +16,8 @@ public interface ApiInterface {
 
     @POST("login.php")
     Call<ModelUser> login(@Body ModelUser modelUser);
+    @GET("docList.php")
+    Call<List<ModelDoc>> getDoctors();
+
 
 }
