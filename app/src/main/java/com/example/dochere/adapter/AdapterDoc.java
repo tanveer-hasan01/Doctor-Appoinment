@@ -29,7 +29,7 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
     @NonNull
     @Override
     public AdapterDoc.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_doctors, parent, false);
         return new AdapterDoc.Holder(view);
     }
 
@@ -44,7 +44,7 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
         }
         holder.name.setText(docs.get(position).getName());
         holder.category.setText(docs.get(position).getCategory());
-        holder.visit.setText(docs.get(position).getVisit());
+        holder.visit.setText(docs.get(position).getVisit()+" BDT");
         holder.rating.setText(docs.get(position).getRating());
 
 
@@ -63,7 +63,7 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
         public Holder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.image);
+            imageView = itemView.findViewById(R.id.avater);
             name = itemView.findViewById(R.id.name);
             visit = itemView.findViewById(R.id.price);
             rating = itemView.findViewById(R.id.rating);

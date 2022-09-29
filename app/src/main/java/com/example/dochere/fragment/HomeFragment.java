@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dochere.R;
 import com.example.dochere.adapter.AdapterCategory;
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment {
         apiInterface.getDoctors().enqueue(new Callback<List<ModelDoc>>() {
             @Override
             public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+                binding.progressBar.setVisibility(View.GONE);
                 docs.addAll(response.body());
                 binding.docRecycler.setAdapter(adapterDoc);
                 adapterDoc.notifyDataSetChanged();
@@ -74,7 +76,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<ModelDoc>> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
 
