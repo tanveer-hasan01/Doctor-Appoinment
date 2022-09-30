@@ -1,6 +1,7 @@
 package com.example.dochere.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dochere.DoctorDatilesActivity;
 import com.example.dochere.R;
 import com.example.dochere.model.ModelDoc;
 
@@ -46,6 +48,22 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
         holder.category.setText(docs.get(position).getCategory());
         holder.visit.setText(docs.get(position).getVisit()+" BDT");
         holder.rating.setText(docs.get(position).getRating());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, DoctorDatilesActivity.class);
+                intent.putExtra("name",docs.get(position).getName());
+                intent.putExtra("category",docs.get(position).getCategory());
+                intent.putExtra("visit",docs.get(position).getVisit());
+                intent.putExtra("time",docs.get(position).getTime());
+                intent.putExtra("rating",docs.get(position).getRating());
+                intent.putExtra("degree",docs.get(position).getDegree());
+                intent.putExtra("id",docs.get(position).getId());
+                context.startActivity(intent);
+
+            }
+        });
 
 
     }
