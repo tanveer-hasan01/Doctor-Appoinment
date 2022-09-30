@@ -60,6 +60,7 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
                 intent.putExtra("rating",docs.get(position).getRating());
                 intent.putExtra("degree",docs.get(position).getDegree());
                 intent.putExtra("id",docs.get(position).getId());
+                intent.putExtra("gender",docs.get(position).getGender());
                 context.startActivity(intent);
 
             }

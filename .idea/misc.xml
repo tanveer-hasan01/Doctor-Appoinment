@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_app_mood.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_appoinment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_doc_patient_list.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_doctor_datiles.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_doctor_login.xml" value="0.36666666666666664" />
@@ -12,8 +13,10 @@
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/fragment_appointment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/item_category.xml" value="0.365625" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/layout/item_doctors.xml" value="0.365625" />
         <entry key="..\:/Users/cse92/AndroidStudioProjects/DocHere/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
