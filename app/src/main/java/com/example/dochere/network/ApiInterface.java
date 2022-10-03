@@ -1,5 +1,6 @@
 package com.example.dochere.network;
 
+import com.example.dochere.model.ModelAppoitment;
 import com.example.dochere.model.ModelDoc;
 import com.example.dochere.model.ModelUser;
 
@@ -13,6 +14,9 @@ import retrofit2.http.POST;
 public interface ApiInterface {
     @POST("createAccount.php")
     Call<ModelUser> createAccount(@Body ModelUser modelUser);
+
+    @POST("insertAppointment.php")
+    Call<ModelAppoitment> insertAppointment(@Body ModelAppoitment modelUser);
 
     @POST("login.php")
     Call<ModelUser> login(@Body ModelUser modelUser);
