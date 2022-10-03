@@ -3,19 +3,31 @@ package com.example.dochere;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.example.dochere.databinding.ActivityAppoinmentBinding;
 import com.example.dochere.databinding.ActivityDoctorDatilesBinding;
+import com.example.dochere.model.ModelAppoitment;
+import com.example.dochere.network.ApiClient;
+import com.example.dochere.network.ApiInterface;
 
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AppoinmentActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     MysharedPreferance sharedPreferance;
     ActivityAppoinmentBinding binding;
+    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +36,11 @@ public class AppoinmentActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setTitle("Patient Details");
 
+        Retrofit instance = ApiClient.instance();
+        apiInterface = instance.create(ApiInterface.class);
         sharedPreferance = MysharedPreferance.getPreferences(this);
+
+
         if (getIntent().getStringExtra("gender").equals("male")) {
             binding.avater.setImageResource(R.drawable.doctor);
         } else {
@@ -42,6 +58,40 @@ public class AppoinmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 pickDate();
+            }
+        });
+
+
+        binding.confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProgressDialog dialog = ProgressDialog.show(AppoinmentActivity.this, "Loading", "Please wait...", true);
+                ModelAppoitment modelAppoitment=new ModelAppoitment();
+                modelAppoitment.setName(binding.patientName.getText().toString());
+                modelAppoitment.setAge(binding.age.getText().toString());
+                modelAppoitment.setWeight(binding.weight.getText().toString());
+                modelAppoitment.setBlood(binding.blood.getText().toString());
+                modelAppoitment.setDocId(getIntent().getStringExtra("id"));
+                modelAppoitment.setPhone(binding.patientPhone.getText().toString());
+                modelAppoitment.setComment(binding.complain.getText().toString());
+                modelAppoitment.setDate(binding.date.getText().toString());
+
+                apiInterface.insertAppointment(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
+                    @Override
+                    public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
+                        Toast.makeText(AppoinmentActivity.this, "Appointment Successful", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(AppoinmentActivity.this, MainActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelAppoitment> call, Throwable t) {
+                        dialog.dismiss();
+                        Toast.makeText(AppoinmentActivity.this, "Failed, Try again", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
         });
 
