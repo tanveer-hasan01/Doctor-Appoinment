@@ -9,6 +9,10 @@ public class ModelAppoitment {
     @Expose
     private String id;
 
+    @SerializedName("status")
+    @Expose
+    private String status;
+
     @SerializedName("docId")
     @Expose
     private String docId;
@@ -47,6 +51,15 @@ public class ModelAppoitment {
     @SerializedName("date")
     @Expose
     private String date;
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;

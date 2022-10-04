@@ -16,6 +16,9 @@
         android:theme="@style/Theme.DocHere"
         tools:targetApi="31">
         <activity
+            android:name=".MyMedicineActivity"
+            android:exported="false" />
+        <activity
             android:name=".AppoinmentActivity"
             android:exported="false" />
         <activity

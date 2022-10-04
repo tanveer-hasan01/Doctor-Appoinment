@@ -23,6 +23,6 @@ public interface ApiInterface {
     @GET("docList.php")
     Call<List<ModelDoc>> getDoctors();
 
-    @GET("myAppointment.php")
-    Call<List<ModelAppoitment>> getmyAppointment();
+    @POST("myAppointment.php")
+    Call<List<ModelAppoitment>> getmyAppointment(@Body ModelAppoitment modelAppoitment);
 }
