@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 sharedPreferance.setName(response.body().getName());
                                 sharedPreferance.setPhone(response.body().getPhone());
                                 sharedPreferance.setEmail(response.body().getEmail());
+                                sharedPreferance.setUserID(response.body().getId());
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             } else {

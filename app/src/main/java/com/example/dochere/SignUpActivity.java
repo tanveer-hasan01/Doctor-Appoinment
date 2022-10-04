@@ -74,12 +74,12 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onResponse(Call<ModelUser> call, Response<ModelUser> response) {
                             dialog.dismiss();
                             Toast.makeText(SignUpActivity.this, "Successfully Signup", Toast.LENGTH_SHORT).show();
-                            mysharedPreferance.setName(modelUser.getName());
+                           /* mysharedPreferance.setName(modelUser.getName());
                             mysharedPreferance.setPhone(modelUser.getPhone());
                             mysharedPreferance.setEmail(modelUser.getEmail());
                             mysharedPreferance.setGender(modelUser.getGender());
-                            mysharedPreferance.setSession("logged");
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                            mysharedPreferance.setSession("logged");*/
+                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                             finish();
                         }
 

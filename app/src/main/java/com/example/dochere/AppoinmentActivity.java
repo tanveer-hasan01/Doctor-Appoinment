@@ -75,6 +75,8 @@ public class AppoinmentActivity extends AppCompatActivity {
                 modelAppoitment.setPhone(binding.patientPhone.getText().toString());
                 modelAppoitment.setComment(binding.complain.getText().toString());
                 modelAppoitment.setDate(binding.date.getText().toString());
+                modelAppoitment.setDocName(getIntent().getStringExtra("name"));
+                modelAppoitment.setUserID(sharedPreferance.getUserID());
 
                 apiInterface.insertAppointment(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
                     @Override

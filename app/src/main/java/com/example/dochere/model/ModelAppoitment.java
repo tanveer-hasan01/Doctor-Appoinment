@@ -13,6 +13,14 @@ public class ModelAppoitment {
     @Expose
     private String docId;
 
+    @SerializedName("userID")
+    @Expose
+    private String userID;
+
+    @SerializedName("docName")
+    @Expose
+    private String docName;
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -42,6 +50,22 @@ public class ModelAppoitment {
 
     public String getId() {
         return id;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
     }
 
     public void setId(String id) {
