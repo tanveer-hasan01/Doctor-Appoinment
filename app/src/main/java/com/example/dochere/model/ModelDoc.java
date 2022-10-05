@@ -13,10 +13,21 @@ public class ModelDoc {
     @Expose
     private String name;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    @SerializedName("password")
+    @Expose
+    private String password;
+
+
     @SerializedName("gender")
     @Expose
     private String gender;
-
+    @SerializedName("response")
+    @Expose
+    private String response;
     @SerializedName("rating")
     @Expose
     private String rating;
@@ -37,6 +48,32 @@ public class ModelDoc {
     @Expose
     private String time;
 
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getGender() {
         return gender;

@@ -21,6 +21,10 @@ public interface ApiInterface {
 
     @POST("login.php")
     Call<ModelUser> login(@Body ModelUser modelUser);
+
+    @POST("docLogin.php")
+    Call<ModelDoc> docLogin(@Body ModelDoc modelUser);
+
     @GET("docList.php")
     Call<List<ModelDoc>> getDoctors();
 
@@ -29,4 +33,7 @@ public interface ApiInterface {
 
     @POST("myMedicine.php")
     Call<List<ModelMedicine>> myMedicine(@Body ModelMedicine modelMedicine);
+
+    @POST("addMedicine.php")
+    Call<ModelMedicine> addMedicine(@Body ModelMedicine modelMedicine);
 }

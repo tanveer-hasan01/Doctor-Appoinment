@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.dochere.adapter.AdapterDoc;
 import com.example.dochere.adapter.AdapterMedicine;
@@ -47,11 +49,23 @@ public class MyMedicineActivity extends AppCompatActivity {
         apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
             @Override
             public void onResponse(Call<List<ModelMedicine>> call, Response<List<ModelMedicine>> response) {
-
+                binding.progressBar.setVisibility(View.GONE);
+                medicines.addAll(response.body());
+                binding.recyclerView.setAdapter(adapterMedicine);
+                adapterMedicine.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<ModelMedicine>> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(MyMedicineActivity.this, "Something wrong! , try again", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
 
             }
         });
