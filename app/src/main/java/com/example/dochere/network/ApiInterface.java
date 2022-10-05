@@ -2,6 +2,7 @@ package com.example.dochere.network;
 
 import com.example.dochere.model.ModelAppoitment;
 import com.example.dochere.model.ModelDoc;
+import com.example.dochere.model.ModelMedicine;
 import com.example.dochere.model.ModelUser;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface ApiInterface {
 
     @POST("myAppointment.php")
     Call<List<ModelAppoitment>> getmyAppointment(@Body ModelAppoitment modelAppoitment);
+
+    @POST("myMedicine.php")
+    Call<List<ModelMedicine>> myMedicine(@Body ModelMedicine modelMedicine);
 }
