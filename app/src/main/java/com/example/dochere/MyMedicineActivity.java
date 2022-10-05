@@ -1,11 +1,16 @@
 package com.example.dochere;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dochere.adapter.AdapterDoc;
@@ -23,12 +28,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyMedicineActivity extends AppCompatActivity {
-
+    AlertDialog dialog;
     MysharedPreferance mysharedPreferance;
     ActivityMyMedicineBinding binding;
     ApiInterface apiInterface;
 
-    ArrayList<ModelMedicine> medicines=new ArrayList();
+    ArrayList<ModelMedicine> medicines = new ArrayList();
     AdapterMedicine adapterMedicine;
 
     @Override
@@ -40,11 +45,11 @@ public class MyMedicineActivity extends AppCompatActivity {
         mysharedPreferance = MysharedPreferance.getPreferences(this);
 
 
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        adapterMedicine = new AdapterMedicine(medicines,this);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        adapterMedicine = new AdapterMedicine(medicines, this);
 
 
-        ModelMedicine modelMedicine=new ModelMedicine();
+        ModelMedicine modelMedicine = new ModelMedicine();
         modelMedicine.setUserId(mysharedPreferance.getUserID());
         apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
             @Override
@@ -65,6 +70,58 @@ public class MyMedicineActivity extends AppCompatActivity {
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                TextView name;
+                CheckBox morning, day, night;
+                Button add;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyMedicineActivity.this);
+                final View mview = LayoutInflater.from(MyMedicineActivity.this).inflate(R.layout.dialog_add_medicine, null);
+                builder.setView(mview);
+                dialog = builder.create();
+                dialog.show();
+                /* dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));*/
+                name = mview.findViewById(R.id.name);
+                morning = mview.findViewById(R.id.morningCheck);
+                day = mview.findViewById(R.id.dayCheck);
+                night = mview.findViewById(R.id.nightCheck);
+                add = mview.findViewById(R.id.add);
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ModelMedicine modelMedicine = new ModelMedicine();
+                        modelMedicine.setName(name.getText().toString());
+                        modelMedicine.setUserId(mysharedPreferance.getUserID());
+
+                        if (morning.isChecked()) {
+                            modelMedicine.setMorning("ok");
+                        }
+                        if (day.isChecked()) {
+                            modelMedicine.setDay("ok");
+                        }
+                        if (night.isChecked()) {
+                            modelMedicine.setNight("ok");
+                        }
+                        apiInterface.addMedicine(modelMedicine).enqueue(new Callback<ModelMedicine>() {
+                            @Override
+                            public void onResponse(Call<ModelMedicine> call, Response<ModelMedicine> response) {
+                                dialog.dismiss();
+                                Toast.makeText(MyMedicineActivity.this, "Successfully added", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ModelMedicine> call, Throwable t) {
+                                Toast.makeText(MyMedicineActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+
+                    }
+                });
 
 
             }
