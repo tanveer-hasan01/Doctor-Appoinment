@@ -55,7 +55,8 @@ public class DoctorLoginActivity extends AppCompatActivity {
                                 dialog.dismiss();
                                 mysharedPreferance.setSession("logged");
                                 mysharedPreferance.setDocID(response.body().getId());
-                                startActivity(new Intent(DoctorLoginActivity.this, MainActivity.class));
+                                mysharedPreferance.setDocName(response.body().getName());
+                                startActivity(new Intent(DoctorLoginActivity.this, DoctorHomeActivity.class));
                                 finish();
                             } else {
                                 dialog.dismiss();

@@ -61,6 +61,22 @@ public class MysharedPreferance {
         return sharedPreferences.getString("name","none");
     }
 
+
+
+    public void setDocName(String docName)
+    {
+        editor.putString("docname",docName);
+        editor.apply();
+    }
+
+    public String getDocName()
+    {
+        return sharedPreferences.getString("docname","none");
+    }
+
+
+
+
     public void setPhone(String phone)
     {
         editor.putString("phone",phone);

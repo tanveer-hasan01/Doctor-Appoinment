@@ -23,7 +23,12 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 }else if(mysharedPreferance.getlogin_type().equals("doc")) {
-                    startActivity(new Intent(SplashActivity.this, DoctorLoginActivity.class));
+                    if (!mysharedPreferance.getSession().equals("none")){
+                        startActivity(new Intent(SplashActivity.this, DoctorHomeActivity.class));
+                    }else {
+                        startActivity(new Intent(SplashActivity.this, DoctorLoginActivity.class));
+                    }
+
                     finish();
                 }else{
                     startActivity(new Intent(SplashActivity.this, AppMoodActivity.class));

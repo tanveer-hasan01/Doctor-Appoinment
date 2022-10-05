@@ -15,25 +15,26 @@ import com.example.dochere.model.ModelAppoitment;
 
 import java.util.ArrayList;
 
-public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Holder> {
+public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppointment.Holder> {
 
-    ArrayList<ModelAppoitment>appoitments;
+    ArrayList<ModelAppoitment> appoitments;
     Context context;
 
-    public AdapterAppoitment(ArrayList<ModelAppoitment> appoitments, Context context) {
+    public AdapterDocAppointment(ArrayList<ModelAppoitment> appoitments, Context context) {
         this.appoitments = appoitments;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterAppoitment.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterDocAppointment.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_appointment, parent, false);
-        return new AdapterAppoitment.Holder(view);
+        return new AdapterDocAppointment.Holder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterAppoitment.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterDocAppointment.Holder holder, int position) {
+
 
         holder.name.setText(appoitments.get(position).getName());
         holder.docname.setText(appoitments.get(position).getDocName());
@@ -43,9 +44,20 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
         holder.status.setText(appoitments.get(position).getStatus());
         holder.comment.setText("Complain : "+appoitments.get(position).getComment());
         holder.date.setText("Date : "+appoitments.get(position).getDate());
+
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
+
     }
 
     @Override
@@ -53,12 +65,10 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
         return appoitments.size();
     }
 
-
-
     public class Holder extends RecyclerView.ViewHolder {
         TextView name,age,weight,blood,status,docname,comment,date;
-
         ImageView imageView;
+
         public Holder(@NonNull View itemView) {
             super(itemView);
 
@@ -71,7 +81,5 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             date=itemView.findViewById(R.id.date);
             status=itemView.findViewById(R.id.status);
             comment=itemView.findViewById(R.id.complain);
-
-        }
     }
-}
+}}
