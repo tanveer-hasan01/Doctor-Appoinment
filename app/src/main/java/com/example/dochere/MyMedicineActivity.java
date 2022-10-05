@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.dochere.adapter.AdapterMedicine;
 import com.example.dochere.databinding.ActivityMainBinding;
 import com.example.dochere.databinding.ActivityMyMedicineBinding;
 import com.example.dochere.model.ModelMedicine;
+import com.example.dochere.network.ApiClient;
 import com.example.dochere.network.ApiInterface;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MyMedicineActivity extends AppCompatActivity {
     AlertDialog dialog;
@@ -42,6 +45,8 @@ public class MyMedicineActivity extends AppCompatActivity {
         binding = ActivityMyMedicineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle("My Medicine");
+        Retrofit instance = ApiClient.instance();
+        apiInterface = instance.create(ApiInterface.class);
         mysharedPreferance = MysharedPreferance.getPreferences(this);
 
 
@@ -49,23 +54,8 @@ public class MyMedicineActivity extends AppCompatActivity {
         adapterMedicine = new AdapterMedicine(medicines, this);
 
 
-        ModelMedicine modelMedicine = new ModelMedicine();
-        modelMedicine.setUserId(mysharedPreferance.getUserID());
-        apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
-            @Override
-            public void onResponse(Call<List<ModelMedicine>> call, Response<List<ModelMedicine>> response) {
-                binding.progressBar.setVisibility(View.GONE);
-                medicines.addAll(response.body());
-                binding.recyclerView.setAdapter(adapterMedicine);
-                adapterMedicine.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<List<ModelMedicine>> call, Throwable t) {
-                binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(MyMedicineActivity.this, "Something wrong! , try again", Toast.LENGTH_SHORT).show();
-            }
-        });
+        medList();
 
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +81,7 @@ public class MyMedicineActivity extends AppCompatActivity {
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ProgressDialog dialog2 = ProgressDialog.show(MyMedicineActivity.this, "Loading", "Please wait...", true);
                         ModelMedicine modelMedicine = new ModelMedicine();
                         modelMedicine.setName(name.getText().toString());
                         modelMedicine.setUserId(mysharedPreferance.getUserID());
@@ -108,12 +99,15 @@ public class MyMedicineActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<ModelMedicine> call, Response<ModelMedicine> response) {
                                 dialog.dismiss();
+                                dialog2.dismiss();
                                 Toast.makeText(MyMedicineActivity.this, "Successfully added", Toast.LENGTH_SHORT).show();
 
+                                medList();
                             }
 
                             @Override
                             public void onFailure(Call<ModelMedicine> call, Throwable t) {
+                                dialog2.dismiss();
                                 Toast.makeText(MyMedicineActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 
                             }
@@ -128,4 +122,26 @@ public class MyMedicineActivity extends AppCompatActivity {
         });
 
     }
+
+    void medList(){
+        ModelMedicine modelMedicine = new ModelMedicine();
+        modelMedicine.setUserId(mysharedPreferance.getUserID());
+        apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
+            @Override
+            public void onResponse(Call<List<ModelMedicine>> call, Response<List<ModelMedicine>> response) {
+                binding.progressBar.setVisibility(View.GONE);
+                medicines.addAll(response.body());
+                binding.recyclerView.setAdapter(adapterMedicine);
+                adapterMedicine.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelMedicine>> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(MyMedicineActivity.this, "No medicine found!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

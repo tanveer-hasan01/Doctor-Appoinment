@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ModelMedicine {
 
-    @SerializedName("name")
+    @SerializedName("med_name")
     @Expose
-    private String name;
+    private String med_name;
 
     @SerializedName("day")
     @Expose
@@ -24,12 +24,12 @@ public class ModelMedicine {
     @Expose
     private String userId;
 
-    public String getName() {
-        return name;
+    public String getMed_name() {
+        return med_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.med_name = name;
     }
 
     public String getDay() {

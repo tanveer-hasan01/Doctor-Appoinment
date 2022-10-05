@@ -36,7 +36,7 @@ public class AdapterMedicine extends RecyclerView.Adapter<AdapterMedicine.Holder
     @Override
     public void onBindViewHolder(@NonNull AdapterMedicine.Holder holder, int position) {
 
-        holder.name.setText(medicines.get(position).getName());
+        holder.name.setText(medicines.get(position).getMed_name());
         if (medicines.get(position).getMorning().equals("ok")){
             holder.morning.setChecked(true);
         }
@@ -62,7 +62,7 @@ public class AdapterMedicine extends RecyclerView.Adapter<AdapterMedicine.Holder
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.medicine);
+            name=itemView.findViewById(R.id.medName);
             morning=itemView.findViewById(R.id.morning);
             day=itemView.findViewById(R.id.day);
             night=itemView.findViewById(R.id.night);
