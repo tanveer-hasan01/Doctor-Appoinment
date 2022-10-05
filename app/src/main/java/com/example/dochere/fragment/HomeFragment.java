@@ -68,6 +68,8 @@ public class HomeFragment extends Fragment {
         apiInterface.getDoctors().enqueue(new Callback<List<ModelDoc>>() {
             @Override
             public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+
+                docs.clear();
                 binding.progressBar.setVisibility(View.GONE);
                 docs.addAll(response.body());
                 binding.docRecycler.setAdapter(adapterDoc);

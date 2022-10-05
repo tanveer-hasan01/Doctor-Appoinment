@@ -1,6 +1,11 @@
 package com.example.dochere.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +16,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dochere.R;
+import com.example.dochere.SignUpActivity;
 import com.example.dochere.model.ModelAppoitment;
+import com.example.dochere.network.ApiClient;
+import com.example.dochere.network.ApiInterface;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppointment.Holder> {
 
     ArrayList<ModelAppoitment> appoitments;
     Context context;
+    ApiInterface apiInterface;
 
     public AdapterDocAppointment(ArrayList<ModelAppoitment> appoitments, Context context) {
         this.appoitments = appoitments;
@@ -33,8 +47,9 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterDocAppointment.Holder holder, int position) {
-
+    public void onBindViewHolder(@NonNull AdapterDocAppointment.Holder holder, @SuppressLint("RecyclerView") int position) {
+        Retrofit instance = ApiClient.instance();
+        apiInterface = instance.create(ApiInterface.class);
 
         holder.name.setText(appoitments.get(position).getName());
         holder.docname.setText(appoitments.get(position).getDocName());
@@ -53,6 +68,40 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
             @Override
             public void onClick(View view) {
 
+
+                new AlertDialog.Builder(context)
+                        .setTitle(" Update Appointment ")
+                        .setMessage("Are you approved this appointment?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                ProgressDialog dialog1 = ProgressDialog.show(context, "Operation Processing", "Please wait...", true);
+
+                                ModelAppoitment modelAppoitment=new ModelAppoitment();
+                                modelAppoitment.setId(appoitments.get(position).getId());
+                                modelAppoitment.setStatus("approved");
+                               apiInterface.update_status(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
+                                   @Override
+                                   public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
+                                       dialog.dismiss();
+                                       dialog1.dismiss();
+                                       holder.imageView.setImageResource(R.drawable.ic_ok);
+                                       holder.status.setText("approved");
+                                   }
+
+                                   @Override
+                                   public void onFailure(Call<ModelAppoitment> call, Throwable t) {
+                                       dialog1.dismiss();
+                                   }
+                               });
+
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 
 
             }

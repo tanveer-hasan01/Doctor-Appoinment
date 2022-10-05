@@ -61,6 +61,7 @@ public class AppointmentFragment extends Fragment {
         apiInterface.getmyAppointment(modelAppoitment).enqueue(new Callback<List<ModelAppoitment>>() {
             @Override
             public void onResponse(Call<List<ModelAppoitment>> call, Response<List<ModelAppoitment>> response) {
+                appoitments.clear();
                 binding.progressBar2.setVisibility(View.GONE);
                 binding.textView19.setVisibility(View.GONE);
                 appoitments.addAll(response.body());

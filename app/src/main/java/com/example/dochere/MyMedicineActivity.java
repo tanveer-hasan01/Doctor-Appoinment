@@ -129,6 +129,7 @@ public class MyMedicineActivity extends AppCompatActivity {
         apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
             @Override
             public void onResponse(Call<List<ModelMedicine>> call, Response<List<ModelMedicine>> response) {
+                medicines.clear();
                 binding.progressBar.setVisibility(View.GONE);
                 medicines.addAll(response.body());
                 binding.recyclerView.setAdapter(adapterMedicine);

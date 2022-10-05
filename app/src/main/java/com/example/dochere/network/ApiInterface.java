@@ -16,6 +16,9 @@ public interface ApiInterface {
     @POST("createAccount.php")
     Call<ModelUser> createAccount(@Body ModelUser modelUser);
 
+    @POST("update_status.php")
+    Call<ModelAppoitment> update_status(@Body ModelAppoitment modelAppoitment);
+
     @POST("insertAppointment.php")
     Call<ModelAppoitment> insertAppointment(@Body ModelAppoitment modelUser);
 

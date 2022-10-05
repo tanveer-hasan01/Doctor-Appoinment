@@ -30,7 +30,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     AdapterDocAppointment adapterAppoitment;
     MysharedPreferance mysharedPreferance;
-    ArrayList<ModelAppoitment> appoitments=new ArrayList<>();
+    ArrayList<ModelAppoitment> appoitments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
         apiInterface = instance.create(ApiInterface.class);
         mysharedPreferance = MysharedPreferance.getPreferences(this);
 
-        binding.docName.setText("Hello "+mysharedPreferance.getDocName());
+        binding.docName.setText("Hello " + mysharedPreferance.getDocName());
 
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,17 +52,17 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 mysharedPreferance.setSession("none");
                 mysharedPreferance.setDocName("none");
                 mysharedPreferance.setDocID("none");
-
                 startActivity(new Intent(DoctorHomeActivity.this, AppMoodActivity.class));
+                finish();
+
             }
         });
 
 
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapterAppoitment = new AdapterDocAppointment(appoitments, DoctorHomeActivity.this);
 
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        adapterAppoitment = new AdapterDocAppointment(appoitments,DoctorHomeActivity.this);
-
-        ModelAppoitment modelAppoitment=new ModelAppoitment();
+        ModelAppoitment modelAppoitment = new ModelAppoitment();
         modelAppoitment.setDocId(mysharedPreferance.getDocID());
         apiInterface.getdocAppointment(modelAppoitment).enqueue(new Callback<List<ModelAppoitment>>() {
             @Override
