@@ -36,22 +36,24 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
 
         holder.name.setText(appoitments.get(position).getName());
         holder.docname.setText(appoitments.get(position).getDocName());
-        holder.age.setText(appoitments.get(position).getAge());
-        holder.blood.setText(appoitments.get(position).getBlood());
-        holder.weight.setText(appoitments.get(position).getWeight());
+        holder.age.setText("Age: "+appoitments.get(position).getAge());
+        holder.blood.setText("Blood: "+appoitments.get(position).getBlood());
+        holder.weight.setText("Weight: "+appoitments.get(position).getWeight());
         holder.status.setText(appoitments.get(position).getStatus());
+        holder.comment.setText("Complain : "+appoitments.get(position).getComment());
+        holder.date.setText("Date : "+appoitments.get(position).getDate());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return appoitments.size();
     }
 
 
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name,age,weight,blood,status,docname;
+        TextView name,age,weight,blood,status,docname,comment,date;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -61,7 +63,9 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             weight=itemView.findViewById(R.id.weight);
             blood=itemView.findViewById(R.id.blood);
             docname=itemView.findViewById(R.id.doctor);
+            date=itemView.findViewById(R.id.date);
             status=itemView.findViewById(R.id.status);
+            comment=itemView.findViewById(R.id.complain);
 
         }
     }
