@@ -69,39 +69,41 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
             public void onClick(View view) {
 
 
-                new AlertDialog.Builder(context)
-                        .setTitle(" Update Appointment ")
-                        .setMessage("Are you approved this appointment?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                if(!appoitments.get(position).getStatus().equals("approved")){
 
-                                ProgressDialog dialog1 = ProgressDialog.show(context, "Operation Processing", "Please wait...", true);
+                    new AlertDialog.Builder(context)
+                            .setTitle(" Update Appointment ")
+                            .setMessage("Are you approved this appointment?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                ModelAppoitment modelAppoitment=new ModelAppoitment();
-                                modelAppoitment.setId(appoitments.get(position).getId());
-                                modelAppoitment.setStatus("approved");
-                               apiInterface.update_status(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
-                                   @Override
-                                   public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
-                                       dialog.dismiss();
-                                       dialog1.dismiss();
-                                       holder.imageView.setImageResource(R.drawable.ic_ok);
-                                       holder.status.setText("approved");
-                                   }
+                                    ProgressDialog dialog1 = ProgressDialog.show(context, "Operation Processing", "Please wait...", true);
 
-                                   @Override
-                                   public void onFailure(Call<ModelAppoitment> call, Throwable t) {
-                                       dialog1.dismiss();
-                                   }
-                               });
+                                    ModelAppoitment modelAppoitment=new ModelAppoitment();
+                                    modelAppoitment.setId(appoitments.get(position).getId());
+                                    modelAppoitment.setStatus("approved");
+                                    apiInterface.update_status(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
+                                        @Override
+                                        public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
+                                            dialog.dismiss();
+                                            dialog1.dismiss();
+                                            holder.imageView.setImageResource(R.drawable.ic_ok);
+                                            holder.status.setText("approved");
+                                        }
 
-                            }
-                        })
+                                        @Override
+                                        public void onFailure(Call<ModelAppoitment> call, Throwable t) {
+                                            dialog1.dismiss();
+                                        }
+                                    });
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
 
 
             }

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.dochere.databinding.ActivityAppMoodBinding;
 import com.example.dochere.databinding.ActivityMainBinding;
@@ -21,7 +22,8 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
     MysharedPreferance mysharedPreferance;
     ActivityMainBinding binding;
     HomeFragment homeFragment = new HomeFragment();
@@ -82,19 +84,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setTitle(" App Exit ")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
 
-        new AlertDialog.Builder(this)
-                .setTitle(" App Exit ")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                       finish();
-                    }
-                })
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            return;
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+        }
 
-                // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton(android.R.string.no, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        mBackPressed = System.currentTimeMillis();
+
+
+
     }
 }

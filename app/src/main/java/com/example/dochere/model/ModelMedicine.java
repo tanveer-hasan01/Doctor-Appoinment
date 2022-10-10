@@ -9,6 +9,10 @@ public class ModelMedicine {
     @Expose
     private String med_name;
 
+    @SerializedName("id")
+    @Expose
+    private String id;
+
     @SerializedName("day")
     @Expose
     private String day;
@@ -23,6 +27,19 @@ public class ModelMedicine {
     @SerializedName("userId")
     @Expose
     private String userId;
+
+
+    public void setMed_name(String med_name) {
+        this.med_name = med_name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getMed_name() {
         return med_name;

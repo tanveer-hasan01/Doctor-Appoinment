@@ -41,6 +41,11 @@ public interface ApiInterface {
     @POST("myMedicine.php")
     Call<List<ModelMedicine>> myMedicine(@Body ModelMedicine modelMedicine);
 
+
+
     @POST("addMedicine.php")
     Call<ModelMedicine> addMedicine(@Body ModelMedicine modelMedicine);
+
+    @POST("delete_madicine.php")
+    Call<ModelMedicine> deleteMedicine(@Body ModelMedicine modelMedicine);
 }

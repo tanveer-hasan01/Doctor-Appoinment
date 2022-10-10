@@ -36,7 +36,7 @@
             android:text="Doctor"
             android:textColor="@color/purple_700"
             android:textSize="18sp"
-            android:textStyle="italic" />
+         />
 
     </androidx.cardview.widget.CardView>
 
@@ -68,7 +68,7 @@
             android:text="Patient"
             android:textColor="@color/purple_700"
             android:textSize="18sp"
-            android:textStyle="italic" />
+           />
 
     </androidx.cardview.widget.CardView>
 

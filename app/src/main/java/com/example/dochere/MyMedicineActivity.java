@@ -54,7 +54,6 @@ public class MyMedicineActivity extends AppCompatActivity {
         adapterMedicine = new AdapterMedicine(medicines, this);
 
 
-
         medList();
 
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -88,12 +87,18 @@ public class MyMedicineActivity extends AppCompatActivity {
 
                         if (morning.isChecked()) {
                             modelMedicine.setMorning("ok");
+                        } else {
+                            modelMedicine.setMorning("no");
                         }
                         if (day.isChecked()) {
                             modelMedicine.setDay("ok");
+                        } else {
+                            modelMedicine.setDay("no");
                         }
                         if (night.isChecked()) {
                             modelMedicine.setNight("ok");
+                        } else {
+                            modelMedicine.setNight("no");
                         }
                         apiInterface.addMedicine(modelMedicine).enqueue(new Callback<ModelMedicine>() {
                             @Override
@@ -123,7 +128,7 @@ public class MyMedicineActivity extends AppCompatActivity {
 
     }
 
-    void medList(){
+    void medList() {
         ModelMedicine modelMedicine = new ModelMedicine();
         modelMedicine.setUserId(mysharedPreferance.getUserID());
         apiInterface.myMedicine(modelMedicine).enqueue(new Callback<List<ModelMedicine>>() {
