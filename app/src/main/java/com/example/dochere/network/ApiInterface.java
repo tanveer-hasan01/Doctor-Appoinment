@@ -44,7 +44,6 @@ public interface ApiInterface {
     @POST("search_doctor.php")
     Call<List<ModelDoc>> searchDoc(@Body ModelDoc modelDoc);
 
-
     @POST("categorized_doc.php")
     Call<List<ModelDoc>> categorized_doc(@Body ModelDoc modelDoc);
     

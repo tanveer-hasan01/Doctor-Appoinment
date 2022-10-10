@@ -26,7 +26,10 @@ public class RatingActivity extends AppCompatActivity {
         binding = ActivityRatingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle("Doctor Rating");
-        
+
+
+        binding.textView6.setText(getIntent().getStringExtra("name"));
+
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
