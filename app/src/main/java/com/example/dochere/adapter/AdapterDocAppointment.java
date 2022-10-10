@@ -60,6 +60,7 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
         holder.comment.setText("Complain : "+appoitments.get(position).getComment());
         holder.date.setText("Date : "+appoitments.get(position).getDate());
 
+        holder.rating.setVisibility(View.GONE);
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
         }
@@ -117,7 +118,7 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name,age,weight,blood,status,docname,comment,date;
+        TextView name,age,weight,blood,status,docname,comment,date,rating;
         ImageView imageView;
 
         public Holder(@NonNull View itemView) {
@@ -132,5 +133,6 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
             date=itemView.findViewById(R.id.date);
             status=itemView.findViewById(R.id.status);
             comment=itemView.findViewById(R.id.complain);
+            rating=itemView.findViewById(R.id.rating);
     }
 }}

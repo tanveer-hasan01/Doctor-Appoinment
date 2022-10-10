@@ -1,6 +1,8 @@
 package com.example.dochere.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dochere.R;
+import com.example.dochere.RatingActivity;
 import com.example.dochere.model.ModelAppoitment;
 
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterAppoitment.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterAppoitment.Holder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.name.setText(appoitments.get(position).getName());
         holder.docname.setText(appoitments.get(position).getDocName());
@@ -45,7 +48,19 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
         holder.date.setText("Date : "+appoitments.get(position).getDate());
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
+            holder.rating.setVisibility(View.VISIBLE);
         }
+
+        holder.rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(context, RatingActivity.class);
+                intent.putExtra("id",appoitments.get(position).getDocId());
+                intent.putExtra("name",appoitments.get(position).getDocName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,7 +71,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
 
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name,age,weight,blood,status,docname,comment,date;
+        TextView name,age,weight,blood,status,docname,comment,date,rating;
 
         ImageView imageView;
         public Holder(@NonNull View itemView) {
@@ -71,6 +86,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             date=itemView.findViewById(R.id.date);
             status=itemView.findViewById(R.id.status);
             comment=itemView.findViewById(R.id.complain);
+            rating=itemView.findViewById(R.id.rating);
 
         }
     }
