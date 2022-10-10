@@ -1,5 +1,6 @@
 package com.example.dochere.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -69,6 +70,33 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
+
+        binding.searchBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ModelDoc modelDoc=new ModelDoc();
+                modelDoc.setName(binding.editText.getText().toString());
+                ProgressDialog dialog1 = ProgressDialog.show(getContext(), "Searching...", "Please wait...", true);
+                apiInterface.searchDoc(modelDoc).enqueue(new Callback<List<ModelDoc>>() {
+                    @Override
+                    public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+                        docs.clear();
+                        docs.addAll(response.body());
+                        binding.recyclerView.setAdapter(adapterDoc);
+                        adapterDoc.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ModelDoc>> call, Throwable t) {
+                        Toast.makeText(getContext(), "Doc not found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
 
 
         return  view;

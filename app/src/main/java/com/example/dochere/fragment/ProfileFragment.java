@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.dochere.AppMoodActivity;
+import com.example.dochere.EditProfileActivity;
 import com.example.dochere.MainActivity;
 import com.example.dochere.MyMedicineActivity;
 import com.example.dochere.MysharedPreferance;
@@ -54,6 +55,15 @@ public class ProfileFragment extends Fragment {
                 mysharedPreferance.setlogin_type("none");
                 startActivity(new Intent(getContext(), AppMoodActivity.class));
 
+            }
+        });
+
+
+        binding.updateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
             }
         });
 
