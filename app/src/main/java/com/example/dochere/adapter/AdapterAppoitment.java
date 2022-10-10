@@ -49,6 +49,8 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
             holder.rating.setVisibility(View.VISIBLE);
+        }else {
+            holder.rating.setVisibility(View.GONE);
         }
 
         holder.rating.setOnClickListener(new View.OnClickListener() {

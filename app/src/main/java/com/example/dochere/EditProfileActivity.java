@@ -3,8 +3,10 @@ package com.example.dochere;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dochere.databinding.ActivityEditProfileBinding;
 import com.example.dochere.databinding.ActivityLoginBinding;
@@ -42,6 +44,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 sharedPreferance.setName(binding.name.getText().toString());
                 sharedPreferance.setEmail(binding.email.getText().toString());
                 sharedPreferance.setPhone(binding.phone.getText().toString());
+                Toast.makeText(EditProfileActivity.this, "Successfully edited", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                startActivity(new Intent(EditProfileActivity.this,MainActivity.class));
+                finish();
             }
         });
 

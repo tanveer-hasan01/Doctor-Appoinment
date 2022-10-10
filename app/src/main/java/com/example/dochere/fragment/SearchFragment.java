@@ -82,6 +82,7 @@ public class SearchFragment extends Fragment {
                 apiInterface.searchDoc(modelDoc).enqueue(new Callback<List<ModelDoc>>() {
                     @Override
                     public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+                      dialog1.dismiss();
                         docs.clear();
                         docs.addAll(response.body());
                         binding.recyclerView.setAdapter(adapterDoc);
@@ -90,7 +91,7 @@ public class SearchFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<ModelDoc>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Doc not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Doctor not found", Toast.LENGTH_SHORT).show();
                     }
                 });
 

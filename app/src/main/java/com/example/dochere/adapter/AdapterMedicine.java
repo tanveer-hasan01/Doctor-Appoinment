@@ -1,5 +1,6 @@
 package com.example.dochere.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -47,7 +48,7 @@ public class AdapterMedicine extends RecyclerView.Adapter<AdapterMedicine.Holder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMedicine.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterMedicine.Holder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.name.setText(medicines.get(position).getMed_name());
         if (medicines.get(position).getMorning().equals("ok")){
@@ -76,7 +77,7 @@ public class AdapterMedicine extends RecyclerView.Adapter<AdapterMedicine.Holder
                                 ProgressDialog dialog1 = ProgressDialog.show(context, "Deleting Medicine", "Please wait...", true);
 
                                 ModelMedicine modelMedicine=new ModelMedicine();
-                                modelMedicine.setId(modelMedicine.getId());
+                                modelMedicine.setId(medicines.get(position).getId());
                                 apiInterface.deleteMedicine(modelMedicine).enqueue(new Callback<ModelMedicine>() {
                                     @Override
                                     public void onResponse(Call<ModelMedicine> call, Response<ModelMedicine> response) {

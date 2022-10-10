@@ -1,6 +1,8 @@
 package com.example.dochere.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dochere.CategorizedDoctoorActivity;
 import com.example.dochere.R;
 import com.example.dochere.model.ModelCategory;
 
@@ -33,10 +36,21 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCategory.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterCategory.Holder holder, @SuppressLint("RecyclerView") int position) {
 
       holder.imageView.setImageResource(categories.get(position).getImage());
       holder.category.setText(categories.get(position).getCategory());
+
+      holder.imageView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+
+              Intent intent=new Intent(context, CategorizedDoctoorActivity.class);
+              intent.putExtra("category",categories.get(position).getCategory());
+              context.startActivity(intent);
+
+          }
+      });
 
     }
 

@@ -26,8 +26,14 @@ public class AppMoodActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mysharedPreferance.setlogin_type("patient");
-                startActivity(new Intent(AppMoodActivity.this, MainActivity.class));
-                finish();
+                if (mysharedPreferance.getSession().equals("none")){
+                    startActivity(new Intent(AppMoodActivity.this, LoginActivity.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(AppMoodActivity.this, MainActivity.class));
+                    finish();
+                }
+
             }
         });
 
