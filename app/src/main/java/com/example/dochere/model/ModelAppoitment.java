@@ -29,6 +29,11 @@ public class ModelAppoitment {
     @Expose
     private String name;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+
     @SerializedName("age")
     @Expose
     private String age;
@@ -44,6 +49,16 @@ public class ModelAppoitment {
     @Expose
     private String comment;
 
+
+    @SerializedName("prescription")
+    @Expose
+    private String prescription;
+
+    @SerializedName("food")
+    @Expose
+    private String food;
+
+
     @SerializedName("phone")
     @Expose
     private String phone;
@@ -52,6 +67,30 @@ public class ModelAppoitment {
     @Expose
     private String date;
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
+    }
+
+    public String getFood() {
+        return food;
+    }
+
+    public void setFood(String food) {
+        this.food = food;
+    }
 
     public String getStatus() {
         return status;

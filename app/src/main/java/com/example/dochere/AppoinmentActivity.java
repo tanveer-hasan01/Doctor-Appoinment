@@ -77,6 +77,9 @@ public class AppoinmentActivity extends AppCompatActivity {
                 modelAppoitment.setDate(binding.date.getText().toString());
                 modelAppoitment.setDocName(getIntent().getStringExtra("name"));
                 modelAppoitment.setUserID(sharedPreferance.getUserID());
+                modelAppoitment.setEmail(sharedPreferance.getemail());
+                modelAppoitment.setPrescription("none");
+                modelAppoitment.setFood("none");
 
                 apiInterface.insertAppointment(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
                     @Override

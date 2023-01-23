@@ -6,11 +6,15 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,14 +65,18 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
         holder.date.setText("Date : "+appoitments.get(position).getDate());
 
         holder.rating.setVisibility(View.GONE);
+
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
+            holder.prescription.setVisibility(View.VISIBLE);
+        }else {
+            holder.imageView.setImageResource(R.drawable.ic_unsyck);
+            holder.prescription.setVisibility(View.GONE);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public boolean onLongClick(View view) {
 
                 if(!appoitments.get(position).getStatus().equals("approved")){
 
@@ -89,6 +97,7 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
                                             dialog.dismiss();
                                             dialog1.dismiss();
                                             holder.imageView.setImageResource(R.drawable.ic_ok);
+                                            holder.prescription.setVisibility(View.VISIBLE);
                                             holder.status.setText("approved");
                                         }
 
@@ -105,6 +114,55 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
                             .show();
 
                 }
+                return false;
+            }
+        });
+
+        holder.prescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText prescription,food;
+                Button submit;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final View mview = LayoutInflater.from(context).inflate(R.layout.write_prescription, null);
+                builder.setView(mview);
+                final AlertDialog dialog_condition = builder.create();
+               // dialog_condition.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog_condition.show();
+
+                prescription = mview.findViewById(R.id.et_prescription);
+                food = mview.findViewById(R.id.food);
+                submit = mview.findViewById(R.id.submit);
+
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        ModelAppoitment modelAppoitment=new ModelAppoitment();
+                        modelAppoitment.setPrescription(prescription.getText().toString());
+                        modelAppoitment.setId(appoitments.get(position).getId());
+                        modelAppoitment.setFood(food.getText().toString());
+                        ProgressDialog dialog1 = ProgressDialog.show(context, "Operation Processing", "Please wait...", true);
+                        apiInterface.add_prescription(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
+                            @Override
+                            public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
+                               mail(appoitments.get(position).getEmail());
+                                Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ModelAppoitment> call, Throwable t) {
+                                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+                        });
+
+                    }
+                });
+
 
 
             }
@@ -118,7 +176,7 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name,age,weight,blood,status,docname,comment,date,rating;
+        TextView name,age,weight,blood,status,docname,comment,date,rating,prescription,email;
         ImageView imageView;
 
         public Holder(@NonNull View itemView) {
@@ -134,5 +192,23 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
             status=itemView.findViewById(R.id.status);
             comment=itemView.findViewById(R.id.complain);
             rating=itemView.findViewById(R.id.rating);
+            prescription=itemView.findViewById(R.id.prescription);
+
     }
-}}
+
+}
+    void mail(String myemail) {
+
+        //String myemail =binding.docMail.getText().toString();
+        String recipientlist = myemail.toString();
+        String[] recipients = recipientlist.split(",");
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+        // intent.putExtra(Intent.EXTRA_SUBJECT, get_subject);
+        // intent.putExtra(Intent.EXTRA_TEXT, get_message);
+        intent.setType("text/plain");
+        context.startActivity(Intent.createChooser(intent, "Select Gmail *"));
+
+    }
+
+}

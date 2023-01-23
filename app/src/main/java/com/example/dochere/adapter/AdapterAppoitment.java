@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,17 +48,27 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
         holder.status.setText(appoitments.get(position).getStatus());
         holder.comment.setText("Complain : "+appoitments.get(position).getComment());
         holder.date.setText("Date : "+appoitments.get(position).getDate());
+        
         if (appoitments.get(position).getStatus().equals("approved")){
             holder.imageView.setImageResource(R.drawable.ic_ok);
+            holder.makePayment.setVisibility(View.VISIBLE);
             holder.rating.setVisibility(View.VISIBLE);
         }else {
             holder.rating.setVisibility(View.GONE);
+            holder.makePayment.setVisibility(View.GONE);
         }
+        
+        holder.makePayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(context, "SSL Commerce account required for Payment Gateway", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         holder.rating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent=new Intent(context, RatingActivity.class);
                 intent.putExtra("id",appoitments.get(position).getDocId());
                 intent.putExtra("name",appoitments.get(position).getDocName());
@@ -74,6 +86,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
 
     public class Holder extends RecyclerView.ViewHolder {
         TextView name,age,weight,blood,status,docname,comment,date,rating;
+        Button makePayment;
 
         ImageView imageView;
         public Holder(@NonNull View itemView) {
@@ -89,6 +102,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             status=itemView.findViewById(R.id.status);
             comment=itemView.findViewById(R.id.complain);
             rating=itemView.findViewById(R.id.rating);
+            makePayment=itemView.findViewById(R.id.make_payment);
 
         }
     }

@@ -61,6 +61,8 @@ public class AdapterDoc extends RecyclerView.Adapter<AdapterDoc.Holder> {
                 intent.putExtra("degree",docs.get(position).getDegree());
                 intent.putExtra("id",docs.get(position).getId());
                 intent.putExtra("gender",docs.get(position).getGender());
+                intent.putExtra("num",docs.get(position).getPhone());
+                intent.putExtra("email",docs.get(position).getEmail());
                 context.startActivity(intent);
 
             }

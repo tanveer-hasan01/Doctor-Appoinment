@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
@@ -50,8 +51,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }else if(binding.phone.getText().toString().isEmpty()){
                     binding.name.setError("required");
                 }else if(binding.email.getText().toString().isEmpty()){
-                    binding.name.setError("required");
-                }else if(binding.password.getText().toString().isEmpty()){
+                    binding.email.setError("required");
+                }else if(!isValidEmail(binding.email.getText().toString())){
+                    binding.email.setError("invalid email");
+                }
+
+                else if(binding.password.getText().toString().isEmpty()){
                     binding.name.setError("required");
                 }else if(!binding.male.isChecked() && !binding.female.isChecked()){
                     Toast.makeText(SignUpActivity.this, "select gender", Toast.LENGTH_SHORT).show();
@@ -95,5 +100,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static boolean isValidEmail(CharSequence email  ) {
+
+
+        return (Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 }

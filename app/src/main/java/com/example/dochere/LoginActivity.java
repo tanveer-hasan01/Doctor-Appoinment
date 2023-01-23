@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
@@ -46,7 +47,11 @@ public class LoginActivity extends AppCompatActivity {
                     binding.email.setError("required");
                 } else if (binding.password.getText().toString().isEmpty()) {
                     binding.password.setError("required");
-                } else {
+                } else if(!isValidEmail(binding.email.getText().toString())){
+                binding.email.setError("invalid email");
+            }
+
+                else {
                     ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "Loading", "Please wait...", true);
                     ModelUser modelUser = new ModelUser();
                     modelUser.setEmail(binding.email.getText().toString());
@@ -90,5 +95,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
+    }
+    public static boolean isValidEmail(CharSequence email  ) {
+
+
+        return (Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 }

@@ -17,6 +17,10 @@ public class ModelDoc {
     @Expose
     private String email;
 
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
     @SerializedName("password")
     @Expose
     private String password;
@@ -61,7 +65,13 @@ public class ModelDoc {
         return email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public void setEmail(String email) {
         this.email = email;
