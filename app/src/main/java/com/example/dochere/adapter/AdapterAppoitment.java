@@ -1,12 +1,14 @@
 package com.example.dochere.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,10 +55,39 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             holder.imageView.setImageResource(R.drawable.ic_ok);
             holder.makePayment.setVisibility(View.VISIBLE);
             holder.rating.setVisibility(View.VISIBLE);
+            holder.show_prescription.setVisibility(View.VISIBLE);
         }else {
             holder.rating.setVisibility(View.GONE);
             holder.makePayment.setVisibility(View.GONE);
+            holder.show_prescription.setVisibility(View.GONE);
         }
+
+
+        holder.show_prescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText prescription,food;
+                Button submit;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final View mview = LayoutInflater.from(context).inflate(R.layout.write_prescription, null);
+                builder.setView(mview);
+                final AlertDialog dialog_condition = builder.create();
+                // dialog_condition.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog_condition.show();
+
+                prescription = mview.findViewById(R.id.et_prescription);
+                food = mview.findViewById(R.id.food);
+                submit = mview.findViewById(R.id.submit);
+                submit.setVisibility(View.GONE);
+                prescription.setEnabled(false);
+                food.setEnabled(false);
+                food.setText(appoitments.get(position).getFood());
+                prescription.setText(appoitments.get(position).getPrescription());
+            }
+        });
+
         
         holder.makePayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +116,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
 
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name,age,weight,blood,status,docname,comment,date,rating;
+        TextView name,age,weight,blood,status,docname,comment,date,rating,show_prescription;
         Button makePayment;
 
         ImageView imageView;
@@ -103,6 +134,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             comment=itemView.findViewById(R.id.complain);
             rating=itemView.findViewById(R.id.rating);
             makePayment=itemView.findViewById(R.id.make_payment);
+            show_prescription=itemView.findViewById(R.id.show_prescription);
 
         }
     }

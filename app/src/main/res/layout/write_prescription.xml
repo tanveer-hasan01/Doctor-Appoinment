@@ -23,6 +23,7 @@
 
     <EditText
 
+        android:textColor="@color/black"
         android:id="@+id/et_prescription"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -40,6 +41,7 @@
 
     <EditText
 
+        android:textColor="@color/black"
         android:id="@+id/food"
         android:layout_width="match_parent"
         android:layout_height="100dp"
