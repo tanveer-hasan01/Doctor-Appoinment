@@ -20,4 +20,9 @@
         android:id="@+id/profile"
         android:title="Profile"
         android:icon="@drawable/profile"/>
+
+    <item
+        android:id="@+id/help"
+        android:title="Help"
+        android:icon="@drawable/ic_help"/>
 </menu>

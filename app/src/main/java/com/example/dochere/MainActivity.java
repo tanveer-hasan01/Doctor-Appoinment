@@ -15,6 +15,7 @@ import com.example.dochere.databinding.ActivityAppMoodBinding;
 import com.example.dochere.databinding.ActivityMainBinding;
 import com.example.dochere.fragment.AppointmentFragment;
 import com.example.dochere.fragment.HomeFragment;
+import com.example.dochere.fragment.MoreFragment;
 import com.example.dochere.fragment.ProfileFragment;
 import com.example.dochere.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ProfileFragment profileFragment = new ProfileFragment();
     AppointmentFragment appointmentFragment = new AppointmentFragment();
     SearchFragment searchFragment = new SearchFragment();
+    MoreFragment moreFragment = new MoreFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
                         }
+                        return true;
+
+
+                    case R.id.help:
+                        setTitle("Help");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, moreFragment).commit();
                         return true;
                 }
 
