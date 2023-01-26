@@ -30,7 +30,6 @@ import retrofit2.Retrofit;
 
 public class AppointmentFragment extends Fragment {
 
-
     ApiInterface apiInterface;
     AdapterAppoitment adapterAppoitment;
     ArrayList<ModelAppoitment>appoitments=new ArrayList<>();

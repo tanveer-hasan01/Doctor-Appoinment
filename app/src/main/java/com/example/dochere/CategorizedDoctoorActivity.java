@@ -49,6 +49,7 @@ public class CategorizedDoctoorActivity extends AppCompatActivity {
         apiInterface.categorized_doc(modelDoc).enqueue(new Callback<List<ModelDoc>>() {
             @Override
             public void onResponse(Call<List<ModelDoc>> call, Response<List<ModelDoc>> response) {
+
                 dialog1.dismiss();
                 docs.clear();
                 docs.addAll(response.body());

@@ -54,6 +54,7 @@ public class MoreFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ModelContact>> call, Response<List<ModelContact>> response) {
 
+                contacts.clear();
                 contacts.addAll(response.body());
                 binding.recyclerView.setAdapter(adapterContact);
                 adapterContact.notifyDataSetChanged();

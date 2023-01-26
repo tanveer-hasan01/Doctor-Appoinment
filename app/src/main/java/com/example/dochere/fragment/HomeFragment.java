@@ -52,6 +52,8 @@ public class HomeFragment extends Fragment {
         apiInterface = instance.create(ApiInterface.class);
         categories.clear();
 
+
+
         categories.add(new ModelCategory(R.drawable.img6,"Cardiologist"));
         categories.add(new ModelCategory(R.drawable.image7,"Orthopaedic"));
         categories.add(new ModelCategory(R.drawable.img8,"Dentist"));

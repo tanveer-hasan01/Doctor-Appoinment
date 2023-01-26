@@ -65,37 +65,54 @@ public class AppoinmentActivity extends AppCompatActivity {
         binding.confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProgressDialog dialog = ProgressDialog.show(AppoinmentActivity.this, "Loading", "Please wait...", true);
-                ModelAppoitment modelAppoitment=new ModelAppoitment();
-                modelAppoitment.setName(binding.patientName.getText().toString());
-                modelAppoitment.setAge(binding.age.getText().toString());
-                modelAppoitment.setWeight(binding.weight.getText().toString());
-                modelAppoitment.setBlood(binding.blood.getText().toString());
-                modelAppoitment.setDocId(getIntent().getStringExtra("id"));
-                modelAppoitment.setPhone(binding.patientPhone.getText().toString());
-                modelAppoitment.setComment(binding.complain.getText().toString());
-                modelAppoitment.setDate(binding.date.getText().toString());
-                modelAppoitment.setDocName(getIntent().getStringExtra("name"));
-                modelAppoitment.setUserID(sharedPreferance.getUserID());
-                modelAppoitment.setEmail(sharedPreferance.getemail());
-                modelAppoitment.setPrescription("none");
-                modelAppoitment.setFood("none");
 
-                apiInterface.insertAppointment(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
-                    @Override
-                    public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
-                        Toast.makeText(AppoinmentActivity.this, "Appointment Successful", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(AppoinmentActivity.this, MainActivity.class));
-                        finish();
-                    }
+               if(binding.complain.getText().toString().isEmpty()){
+                   binding.complain.setError("required");
+               }else if(binding.blood.getText().toString().isEmpty()){
+                    binding.blood.setError("required");
+                }else if(binding.age.getText().toString().isEmpty()){
+                   binding.age.setError("required");
+               }else if(binding.patientPhone.getText().toString().isEmpty()){
+                   binding.patientPhone.setError("required");
+               }else if(binding.weight.getText().toString().isEmpty()){
+                   binding.weight.setError("required");
+               }else {
 
-                    @Override
-                    public void onFailure(Call<ModelAppoitment> call, Throwable t) {
-                        dialog.dismiss();
-                        Toast.makeText(AppoinmentActivity.this, "Failed, Try again", Toast.LENGTH_SHORT).show();
+                   ProgressDialog dialog = ProgressDialog.show(AppoinmentActivity.this, "Loading", "Please wait...", true);
+                   ModelAppoitment modelAppoitment=new ModelAppoitment();
+                   modelAppoitment.setName(binding.patientName.getText().toString());
+                   modelAppoitment.setAge(binding.age.getText().toString());
+                   modelAppoitment.setWeight(binding.weight.getText().toString());
+                   modelAppoitment.setBlood(binding.blood.getText().toString());
+                   modelAppoitment.setDocId(getIntent().getStringExtra("id"));
+                   modelAppoitment.setPhone(binding.patientPhone.getText().toString());
+                   modelAppoitment.setComment(binding.complain.getText().toString());
+                   modelAppoitment.setDate(binding.date.getText().toString());
+                   modelAppoitment.setDocName(getIntent().getStringExtra("name"));
+                   modelAppoitment.setUserID(sharedPreferance.getUserID());
+                   modelAppoitment.setEmail(sharedPreferance.getemail());
+                   modelAppoitment.setPrescription("none");
+                   modelAppoitment.setFood("none");
 
-                    }
-                });
+                   apiInterface.insertAppointment(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
+                       @Override
+                       public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
+                           Toast.makeText(AppoinmentActivity.this, "Appointment Successful", Toast.LENGTH_LONG).show();
+                           startActivity(new Intent(AppoinmentActivity.this, MainActivity.class));
+                           finish();
+                       }
+
+                       @Override
+                       public void onFailure(Call<ModelAppoitment> call, Throwable t) {
+                           dialog.dismiss();
+                           Toast.makeText(AppoinmentActivity.this, "Failed, Try again", Toast.LENGTH_SHORT).show();
+
+                       }
+                   });
+
+               }
+
+
 
             }
         });

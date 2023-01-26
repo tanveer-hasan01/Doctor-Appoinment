@@ -91,6 +91,7 @@ public class SearchFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<ModelDoc>> call, Throwable t) {
+                        dialog1.dismiss();
                         Toast.makeText(getContext(), "Doctor not found", Toast.LENGTH_SHORT).show();
                     }
                 });
