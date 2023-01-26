@@ -58,16 +58,16 @@ public class HomeFragment extends Fragment {
         categories.add(new ModelCategory(R.drawable.image7,"Orthopaedic"));
         categories.add(new ModelCategory(R.drawable.img8,"Dentist"));
         categories.add(new ModelCategory(R.drawable.surgery_room,"Tumor & Cancer surgery"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Allergists/Immunologists"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Anesthesiologists"));
+        categories.add(new ModelCategory(R.drawable.immu,"Allergists/Immunologists"));
+        categories.add(new ModelCategory(R.drawable.anesthesiologist,"Anesthesiologists"));
         categories.add(new ModelCategory(R.drawable.medicine,"Critical Care Medicine Specialists"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Endocrinologists"));
+        categories.add(new ModelCategory(R.drawable.endocrinologists,"Endocrinologists"));
         categories.add(new ModelCategory(R.drawable.medicine,"Emergency Medicine Specialists"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Gastroenterologists"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Physiatrists"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Plastic Surgeons"));
-        categories.add(new ModelCategory(R.drawable.medicine,"General Surgeons"));
-        categories.add(new ModelCategory(R.drawable.medicine,"Sports Medicine Specialists"));
+        categories.add(new ModelCategory(R.drawable.gastroenterology,"Gastroenterologists"));
+        categories.add(new ModelCategory(R.drawable.physiatrist,"Physiatrists"));
+        categories.add(new ModelCategory(R.drawable.plasticsurgery,"Plastic Surgeons"));
+        categories.add(new ModelCategory(R.drawable.generalsurgery,"General Surgeons"));
+        categories.add(new ModelCategory(R.drawable.sportsmedicine,"Sports Medicine Specialists"));
 
         adapter = new AdapterCategory(categories, getContext());
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
