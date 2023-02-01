@@ -29,6 +29,7 @@
 
         <EditText
 
+            android:inputType="textMultiLine"
             android:id="@+id/et_prescription"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -36,7 +37,6 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:hint="Type Medicine "
-            android:inputType="textPersonName"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -45,7 +45,7 @@
 
 
         <EditText
-
+            android:inputType="textMultiLine"
             android:id="@+id/food"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -53,7 +53,6 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:hint="Suggest and Avoid Food "
-            android:inputType="textPersonName"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

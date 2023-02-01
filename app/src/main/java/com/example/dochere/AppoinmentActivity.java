@@ -76,7 +76,10 @@ public class AppoinmentActivity extends AppCompatActivity {
                    binding.patientPhone.setError("required");
                }else if(binding.weight.getText().toString().isEmpty()){
                    binding.weight.setError("required");
-               }else {
+               }else if(binding.date.getText().toString().isEmpty()){
+                   binding.date.setError("required");
+               }
+               else {
 
                    ProgressDialog dialog = ProgressDialog.show(AppoinmentActivity.this, "Loading", "Please wait...", true);
                    ModelAppoitment modelAppoitment=new ModelAppoitment();
@@ -120,11 +123,13 @@ public class AppoinmentActivity extends AppCompatActivity {
     }
 
     private void pickDate() {
+
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR); // current year
         int mMonth = c.get(Calendar.MONTH); // current month
         int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
         // date picker dialog
+
         datePickerDialog = new DatePickerDialog(AppoinmentActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -134,6 +139,7 @@ public class AppoinmentActivity extends AppCompatActivity {
                         binding.date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
 }
