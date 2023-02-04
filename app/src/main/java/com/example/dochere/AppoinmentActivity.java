@@ -65,8 +65,13 @@ public class AppoinmentActivity extends AppCompatActivity {
         binding.confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!sharedPreferance.getSession().equals("ok")){
 
-               if(binding.complain.getText().toString().isEmpty()){
+                    Toast.makeText(AppoinmentActivity.this, "Login required", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AppoinmentActivity.this, LoginActivity.class));
+
+                }
+               else if(binding.complain.getText().toString().isEmpty()){
                    binding.complain.setError("required");
                }else if(binding.blood.getText().toString().isEmpty()){
                     binding.blood.setError("required");
