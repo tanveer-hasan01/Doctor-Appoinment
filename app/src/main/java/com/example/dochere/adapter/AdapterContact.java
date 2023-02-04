@@ -36,6 +36,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.Holder> 
 
         holder.number.setText(contacts.get(position).getNumber());
         holder.text.setText(contacts.get(position).getText());
+        holder.type.setText(contacts.get(position).getType());
 
     }
 
@@ -46,12 +47,13 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.Holder> 
 
     public class Holder extends RecyclerView.ViewHolder {
 
-        TextView text,number;
+        TextView text,number,type;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             text=itemView.findViewById(R.id.tt_text);
             number=itemView.findViewById(R.id.number);
+            type=itemView.findViewById(R.id.type);
         }
     }
 }
