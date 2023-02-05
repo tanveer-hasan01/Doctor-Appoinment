@@ -33,11 +33,9 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterContact.Holder holder, int position) {
-
         holder.number.setText(contacts.get(position).getNumber());
         holder.text.setText(contacts.get(position).getText());
         holder.type.setText(contacts.get(position).getType());
-
     }
 
     @Override

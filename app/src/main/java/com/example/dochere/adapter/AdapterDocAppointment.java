@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,14 +149,14 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
                         apiInterface.add_prescription(modelAppoitment).enqueue(new Callback<ModelAppoitment>() {
                             @Override
                             public void onResponse(Call<ModelAppoitment> call, Response<ModelAppoitment> response) {
-                               mail(appoitments.get(position).getEmail());
+                               mail(appoitments.get(position).getEmail(),prescription.getText().toString(),food.getText().toString());
                                 Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show();
                                 dialog1.dismiss();
                             }
 
                             @Override
                             public void onFailure(Call<ModelAppoitment> call, Throwable t) {
-                                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "check internet connection", Toast.LENGTH_SHORT).show();
                                 dialog1.dismiss();
                             }
                         });
@@ -197,17 +198,28 @@ public class AdapterDocAppointment extends RecyclerView.Adapter<AdapterDocAppoin
     }
 
 }
-    void mail(String myemail) {
+    void mail(String myemail,String prescription,String food) {
 
         //String myemail =binding.docMail.getText().toString();
-        String recipientlist = myemail.toString();
+   /*     String recipientlist = myemail.toString();
         String[] recipients = recipientlist.split(",");
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
         // intent.putExtra(Intent.EXTRA_SUBJECT, get_subject);
         // intent.putExtra(Intent.EXTRA_TEXT, get_message);
         intent.setType("text/plain");
-        context.startActivity(Intent.createChooser(intent, "Select Gmail *"));
+        context.startActivity(Intent.createChooser(intent, "Select Gmail *"));*/
+
+        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
+        selectorIntent.setData(Uri.parse("mailto:"));
+
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{myemail});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "patient ePrescription");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "prescription: "+prescription+"   Suggested and Avoid Food: "+food);
+        emailIntent.setSelector( selectorIntent );
+
+        context.startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
     }
 

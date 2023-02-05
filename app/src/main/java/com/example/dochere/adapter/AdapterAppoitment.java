@@ -90,6 +90,7 @@ public class AdapterAppoitment extends RecyclerView.Adapter<AdapterAppoitment.Ho
             holder.rating.setVisibility(View.VISIBLE);
             holder.show_prescription.setVisibility(View.VISIBLE);
         }else {
+            holder.imageView.setImageResource(R.drawable.ic_unsyck);
             holder.rating.setVisibility(View.GONE);
             holder.makePayment.setVisibility(View.GONE);
             holder.show_prescription.setVisibility(View.GONE);

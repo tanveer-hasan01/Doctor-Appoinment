@@ -67,6 +67,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ModelDoc> call, Throwable t) {
+                            dialog.dismiss();
                             Toast.makeText(DoctorLoginActivity.this, "Invalid Email or Password ! Try again", Toast.LENGTH_SHORT).show();
 
                         }
