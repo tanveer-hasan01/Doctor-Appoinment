@@ -1,8 +1,8 @@
 # Doctor-Appointment System Mobile App
 A user-friendly Android application that simplifies the process of scheduling doctor appointments and managing healthcare interactions.
 
-**Features:
-Patient Features:**
+**Features:**
+**Patient Features:**
 
  ✦ Multi-user access: Create an account and log in to manage your appointments and health records.
 
@@ -16,7 +16,10 @@ Patient Features:**
 
  ✦ Rate doctors' services: Provide feedback by rating your experience with each doctor.
 
-**Doctor Features:**
+ 
+![3](https://github.com/tanveer-hasan01/Doctor-Appoinment/assets/43530217/79c832a6-f6ee-4d13-8aa6-a5cb39df91ef)
+
+**Doctor App Features:**
 
  ✦ Manage patient appointments: View, approve, or reschedule patient appointments efficiently.
 
@@ -24,7 +27,6 @@ Patient Features:**
 
  ✦ Maintain patient records: Access and maintain patient records for effective treatment and follow-ups.
 
-![3](https://github.com/tanveer-hasan01/Doctor-Appoinment/assets/43530217/90daf8bd-b8ac-47ec-888c-2cb44a792227)
+![4](https://github.com/tanveer-hasan01/Doctor-Appoinment/assets/43530217/94ccfcaf-0ee1-461e-8f1e-797447abc054)
 
-![4](https://github.com/tanveer-hasan01/Doctor-Appoinment/assets/43530217/e82c5d67-5a82-4eff-84ff-1140d2822bd1)
 
